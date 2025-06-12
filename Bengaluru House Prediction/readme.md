@@ -1,66 +1,88 @@
-# Bengaluru House Price Prediction (ML Project)
+# House Price Prediction Project
 
-This project predicts house prices in Bengaluru using machine learning. It follows a clean, class-based structure and includes data cleaning, univariate and bivariate analysis, model training (Linear & Random Forest), evaluation, and deployment via Streamlit.
+## Overview
 
----
-
-## Project Structure
-
-bengaluru_price_prediction/
-│
-├── data/
-│ └── Bengaluru_House_Data.csv
-│
-├── main.ipynb # Jupyter Notebook for step-by-step development
-├── streamlit_app.py # Streamlit app file
-├── model/
-│ └── random_forest_model.pkl # Pickled trained model
-│
-├── utils/
-│ ├── data_cleaning.py # Class for loading and cleaning data
-│ ├── univariate_analysis.py # Class for univariate visualizations
-│ ├── bivariate_analysis.py # Class for bivariate visualizations
-│ ├── model_training.py # Class to train and evaluate model
-│ └── model_pickle.py # Class to save and load model
-│
-├── requirements.txt # All dependencies
-└── README.md # This file
-
-## How It Works
-
-### 1. Data Preprocessing
-- Cleaned outliers, missing values, and inconsistent entries.
-- Extracted BHK and Total Square Feet.
-- Encoded categorical columns.
-
-### 2. Exploratory Data Analysis (EDA)
-- **Univariate Analysis:** Price distribution, BHK count, area type, availability.
-- **Bivariate Analysis:** Price vs BHK, Price vs Location, Price vs Sqft.
-
-### 3. Model Training
-- Implemented both **Linear Regression** and **Random Forest Regressor**.
-- Achieved R² Score: `0.75` (Random Forest)
-
-### 4. Model Persistence
-- Used `pickle` to save and reload the trained model for deployment.
-
-### 5. Streamlit App
-- Predict house price using simple UI.
-- Takes inputs: location, sqft, BHK, bath.
-- Returns prediction in **PKR (₨)**.
+This project focuses on predicting house prices in Bengaluru using machine learning models. It includes complete data preprocessing, feature engineering, model training, and evaluation. The project demonstrates how to clean real-world messy datasets, prepare them for regression tasks, and build an effective predictive model using Support Vector Regression (SVR).
 
 ---
 
-## Sample Output
+## Objectives
 
-Predicted House Price: ₨ 42.28 Lakhs
+- Load and explore the raw dataset
+- Clean columns like `total_sqft` and `size`
+- Encode categorical variables
+- Handle missing values and data types
+- Train different regression models (Linear, Random Forest, SVR)
+- Evaluate models using metrics like MSE and R² Score
+- Use SVR as the final prediction model
 
-## Requirements
+---
 
-- Python 3.x
-- Pandas
-- Numpy
-- Scikit-learn
-- Seaborn
-- Matplotlib
-- Streamlit
+## Dataset Description
+
+The dataset includes the following key columns:
+
+- `area_type`: Type of the property area
+- `availability`: When the property is available
+- `location`: Property location
+- `size`: BHK or Bedroom count (e.g., "2 BHK", "4 Bedroom")
+- `society`: Name of the residential society
+- `total_sqft`: Total area of the property
+- `bath`: Number of bathrooms
+- `balcony`: Number of balconies
+- `price`: Price in lakhs (target column)
+
+---
+
+## Technologies Used
+
+- Python
+- Pandas and NumPy (data manipulation)
+- Matplotlib and Seaborn (visualization)
+- scikit-learn (modeling and evaluation)
+
+---
+
+## Model Pipeline
+
+1. **Preprocessing**  
+   - Convert `size` to numeric format (e.g., "2 BHK" → 2)
+   - Clean `total_sqft`, handling ranges and text units like "Sq. Yards"
+   - Drop rows with critical missing values
+   - Encode categorical features using one-hot encoding
+   - Scale features using `StandardScaler`
+
+2. **Modeling**  
+   - Support for three model types:
+     - Linear Regression
+     - Random Forest Regressor
+     - SVR (Support Vector Regression)
+   - Trained using 80/20 train-test split
+
+3. **Evaluation**  
+   - Mean Squared Error (MSE)
+   - R² Score
+
+---
+
+## Final Model
+
+The final model used is **SVR (Support Vector Regression)** with RBF kernel, after trying out multiple models. It performed well on scaled numerical and encoded categorical features.
+
+---
+
+## File Structure
+
+- `PricePredictionModel` class: Encapsulates all steps from data preparation to model evaluation
+- Notebook cells:
+  - Importing libraries
+  - Reading and exploring dataset
+  - Preprocessing
+  - Model training
+  - Evaluation results
+
+---
+
+## Conclusion
+
+This project automates the entire machine learning pipeline for real estate price prediction using structured data. It can serve as a strong foundation for further enhancements like hyperparameter tuning, feature selection, or model deployment
