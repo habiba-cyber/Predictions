@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 # Load model
-with open('House_Prediction_Model_SVR.pkl', 'rb') as f:
+with open('House_Prediction_Model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 st.title("House Price Prediction")
